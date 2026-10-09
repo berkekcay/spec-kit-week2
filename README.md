@@ -1,11 +1,11 @@
 # Quote of the Day
 
-A small static page that shows a random quote, a **New quote** button that always shows a
+A small static page that shows a random quote, a "New quote" button that always shows a
 different quote, and a ☆/★ favorite toggle that persists across reloads in the same browser.
 
 Built for Week 2 of *AI-Augmented Software Engineering* using
 [GitHub Spec Kit](https://github.com/github/spec-kit) (spec-driven development):
-constitution → specify → plan → tasks → implement → converge. See [writeup.md](writeup.md).
+constitution, specify, plan, tasks, implement, converge. See [writeup.md](writeup.md).
 
 ## Run
 
