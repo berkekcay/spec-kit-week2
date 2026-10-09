@@ -180,3 +180,9 @@ gracefully.
 - [X] T022 Use single quotes for the notice string in `js/app.js` (escape the apostrophe) per Constitution I formatting rule (contradicts)
 - [X] T023 Write `README.md` (what it is, how to run tests and the page, link to quickstart) per T015 / plan structure (missing)
 - [X] T024 Add the one-line responsibility comment at the top of each file in `tests/` per Constitution I (partial)
+
+---
+
+## Phase 8: Convergence
+
+- [ ] T025 CRITICAL: Split `createFavoritesStore` in `js/favorites.js` (40 lines) so every function is ≤ 30 lines, keeping `contracts/modules.md` behavior, per Constitution I (contradicts)
