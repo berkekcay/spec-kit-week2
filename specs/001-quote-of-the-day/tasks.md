@@ -30,14 +30,15 @@ Single static project at the repository root: `index.html`, `css/`, `js/`, `test
 
 **Purpose**: Project initialization and basic structure
 
-- [ ] T001 Create `package.json` at repo root with `"type": "module"`, `"private": true`, and
-  script `"test": "node --test tests/"` (no dependencies)
-- [ ] T002 [P] Create `.gitignore` at repo root ignoring `node_modules/` and OS/editor files
-- [ ] T003 [P] Create `index.html` skeleton with the elements and IDs from
+- [X] T001 Create `package.json` at repo root with `"type": "module"`, `"private": true`, and
+  script `"test": "node --test"` (no dependencies; Node 20+ does not accept a directory
+  argument, the runner auto-discovers `*.test.js`)
+- [X] T002 [P] Create `.gitignore` at repo root ignoring `node_modules/` and OS/editor files
+- [X] T003 [P] Create `index.html` skeleton with the elements and IDs from
   `contracts/ui.md` (`#quote` with `aria-live="polite"`, `#quote-text`, `#quote-author`,
   `#new-quote`, `#favorite` with `aria-pressed="false"`, `#notice` with `role="status"` and
   `hidden`) and `<script type="module" src="js/app.js">`
-- [ ] T004 [P] Create `css/styles.css` with centered card layout, light/dark theme via
+- [X] T004 [P] Create `css/styles.css` with centered card layout, light/dark theme via
   `prefers-color-scheme`, and a visible `:focus-visible` outline for buttons
 
 ---
@@ -46,10 +47,10 @@ Single static project at the repository root: `index.html`, `css/`, `js/`, `test
 
 **Purpose**: The quote collection every story depends on
 
-- [ ] T005 Write `tests/quotes.test.js`: collection "length ≥ 10", "IDs unique", each `id`,
+- [X] T005 Write `tests/quotes.test.js`: collection "length ≥ 10", "IDs unique", each `id`,
   `text`, `author` is a "non-empty string after trimming" (data-model.md) — run, confirm it
   fails
-- [ ] T006 Create `js/quotes.js` exporting frozen `QUOTES` with ≥ 10 quotes (`id` as stable
+- [X] T006 Create `js/quotes.js` exporting frozen `QUOTES` with ≥ 10 quotes (`id` as stable
   kebab-case slug, `text`, `author`) — run `npm test`, confirm T005 passes
 
 **Checkpoint**: Foundation ready — user story work can begin
@@ -65,15 +66,15 @@ than one distinct quote shows up across visits.
 
 ### Tests for User Story 1 ⚠️
 
-- [ ] T007 [P] [US1] Write `tests/quote-picker.test.js` per `contracts/modules.md`: with a
+- [X] T007 [P] [US1] Write `tests/quote-picker.test.js` per `contracts/modules.md`: with a
   stub RNG returning 0 → first quote; returning 0.999 → last quote; result is always an
   element of the input; empty array throws — run, confirm it fails
 
 ### Implementation for User Story 1
 
-- [ ] T008 [US1] Implement `pickRandomQuote(quotes, rng = Math.random)` in
+- [X] T008 [US1] Implement `pickRandomQuote(quotes, rng = Math.random)` in
   `js/quote-picker.js` — confirm T007 passes
-- [ ] T009 [US1] Implement `js/app.js` render: on `DOMContentLoaded`, pick a quote from
+- [X] T009 [US1] Implement `js/app.js` render: on `DOMContentLoaded`, pick a quote from
   `QUOTES`, set `#quote-text` and `#quote-author` ("— Author"), keep it as `currentQuote`
 
 **Checkpoint**: Page shows a random quote on every load (MVP)
@@ -89,7 +90,7 @@ is displayed.
 
 ### Implementation for User Story 2
 
-- [ ] T010 [US2] In `js/app.js`, handle `click` on `#new-quote`: pick a quote with
+- [X] T010 [US2] In `js/app.js`, handle `click` on `#new-quote`: pick a quote with
   `pickRandomQuote` and re-render (keyboard activation comes from the native `<button>`)
 
 **Checkpoint**: US1 + US2 work independently
@@ -106,7 +107,7 @@ gracefully.
 
 ### Tests for User Story 3 ⚠️
 
-- [ ] T011 [P] [US3] Write `tests/favorites.test.js` using an in-memory fake `Storage`:
+- [X] T011 [P] [US3] Write `tests/favorites.test.js` using an in-memory fake `Storage`:
   empty storage → no favorites; `toggle` adds then removes and returns new state; state is
   written to key `qotd.favorites.v1` as a JSON array; a new store over the same storage sees
   saved favorites (reload); invalid JSON / non-array → empty set; unknown IDs and non-strings
@@ -116,13 +117,13 @@ gracefully.
 
 ### Implementation for User Story 3
 
-- [ ] T012 [US3] Implement `createFavoritesStore(storage, validIds)` and `STORAGE_KEY` in
+- [X] T012 [US3] Implement `createFavoritesStore(storage, validIds)` and `STORAGE_KEY` in
   `js/favorites.js` per `contracts/modules.md` and data-model.md load/save rules — confirm
   T011 passes
-- [ ] T013 [US3] In `js/app.js`, obtain `window.localStorage` inside `try/catch` (access itself
+- [X] T013 [US3] In `js/app.js`, obtain `window.localStorage` inside `try/catch` (access itself
   can throw), create the store with the set of `QUOTES` IDs, and render `#favorite` state:
   ☆/★, `aria-pressed`, label "Add to favorites"/"Remove from favorites"
-- [ ] T014 [US3] In `js/app.js`, handle `click` on `#favorite`: `toggle(currentQuote.id)`,
+- [X] T014 [US3] In `js/app.js`, handle `click` on `#favorite`: `toggle(currentQuote.id)`,
   re-render the button; if `store.persistent` is false, unhide `#notice` with
   "Favorites won't be saved in this browser."
 

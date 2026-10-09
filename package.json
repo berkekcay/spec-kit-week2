@@ -1,0 +1,10 @@
+{
+  "name": "quote-of-the-day",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Quote of the Day page built with GitHub Spec Kit (spec-driven development).",
+  "scripts": {
+    "test": "node --test"
+  }
+}

@@ -80,7 +80,7 @@ tests/
 ├── quotes.test.js       # Collection is valid (≥10, unique IDs, non-empty fields)
 ├── quote-picker.test.js
 └── favorites.test.js
-package.json             # {"type":"module"} + "test": "node --test tests/"
+package.json             # {"type":"module"} + "test": "node --test" (auto-discovers tests/*.test.js; Node 20+ rejects a directory argument)
 ```
 
 **Structure Decision**: Single static project at the repository root (no frontend/backend

@@ -9,7 +9,7 @@
 ## Run the tests
 
 ```bash
-npm test          # same as: node --test tests/
+npm test          # same as: node --test (auto-discovers tests/*.test.js)
 ```
 
 Expected: all suites pass (quotes, quote-picker, favorites).
