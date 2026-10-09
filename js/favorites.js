@@ -2,8 +2,7 @@
 
 export const STORAGE_KEY = 'qotd.favorites.v1';
 
-function loadIds(storage, validIds) {
-  const raw = storage.getItem(STORAGE_KEY);
+function parseIds(raw, validIds) {
   if (raw === null) {
     return [];
   }
@@ -19,38 +18,40 @@ function loadIds(storage, validIds) {
   return parsed.filter((id) => typeof id === 'string' && validIds.has(id));
 }
 
+// Returns the saved IDs and whether storage is usable; never throws.
+function readFavorites(storage, validIds) {
+  if (storage === null) {
+    return { ids: [], persistent: false };
+  }
+  try {
+    return { ids: parseIds(storage.getItem(STORAGE_KEY), validIds), persistent: true };
+  } catch {
+    return { ids: [], persistent: false };
+  }
+}
+
+// Returns true when the write succeeded.
+function writeFavorites(storage, favorites) {
+  try {
+    storage.setItem(STORAGE_KEY, JSON.stringify([...favorites]));
+    return true;
+  } catch {
+    return false;
+  }
+}
+
 export function createFavoritesStore(storage, validIds) {
-  const favorites = new Set();
-  let persistent = storage !== null;
-
-  if (persistent) {
-    try {
-      loadIds(storage, validIds).forEach((id) => favorites.add(id));
-    } catch {
-      persistent = false;
-    }
-  }
-
-  function save() {
-    if (!persistent) {
-      return;
-    }
-    try {
-      storage.setItem(STORAGE_KEY, JSON.stringify([...favorites]));
-    } catch {
-      persistent = false;
-    }
-  }
+  const initial = readFavorites(storage, validIds);
+  const favorites = new Set(initial.ids);
+  let persistent = initial.persistent;
 
   return {
     isFavorite: (id) => favorites.has(id),
     toggle(id) {
-      if (favorites.has(id)) {
-        favorites.delete(id);
-      } else {
+      if (!favorites.delete(id)) {
         favorites.add(id);
       }
-      save();
+      persistent = persistent && writeFavorites(storage, favorites);
       return favorites.has(id);
     },
     ids: () => [...favorites],

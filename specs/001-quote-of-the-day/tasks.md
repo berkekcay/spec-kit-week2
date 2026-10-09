@@ -144,8 +144,8 @@ gracefully.
 
 ## Phase 6: Polish & Cross-Cutting Concerns
 
-- [ ] T015 [P] Write `README.md`: what it is, how to run tests and the page (link quickstart)
-- [ ] T016 Run `npm test` and every validation scenario in `quickstart.md`; fix anything that
+- [X] T015 [P] Write `README.md`: what it is, how to run tests and the page (link quickstart)
+- [X] T016 Run `npm test` and every validation scenario in `quickstart.md`; fix anything that
   fails by updating spec/plan first if the artifact was wrong
 
 ---
@@ -185,4 +185,4 @@ gracefully.
 
 ## Phase 8: Convergence
 
-- [ ] T025 CRITICAL: Split `createFavoritesStore` in `js/favorites.js` (40 lines) so every function is ≤ 30 lines, keeping `contracts/modules.md` behavior, per Constitution I (contradicts)
+- [X] T025 CRITICAL: Split `createFavoritesStore` in `js/favorites.js` (40 lines) so every function is ≤ 30 lines, keeping `contracts/modules.md` behavior, per Constitution I (contradicts)
