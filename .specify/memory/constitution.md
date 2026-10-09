@@ -1,50 +1,86 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# Quote of the Day Constitution
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Code Quality: Small, Readable Units
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+- Every JavaScript module MUST have one clear responsibility, described in a one-line comment
+  at the top of the file.
+- Functions MUST be short enough to read without scrolling (target ≤ 30 lines) and MUST use
+  descriptive names; no single-letter names outside loop indices.
+- No dead code, commented-out code, or `console.log` debugging statements in committed code.
+- Formatting MUST be consistent across files (2-space indent, semicolons, single quotes).
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+Rationale: a small static app should be understandable in one sitting by a new contributor
+or a coding agent.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### II. Test-First for Logic (NON-NEGOTIABLE)
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+- All non-UI logic (quote selection, favorites persistence, data validation) MUST have
+  automated tests written before or alongside the implementation, and the tests MUST fail
+  before the implementation makes them pass.
+- Tests MUST run with zero installs using Node's built-in runner (`node --test`).
+- A change MUST NOT be merged while any test fails.
+- Every bug fix MUST add a test that reproduces the bug.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+Rationale: tests are the only objective signal that the implementation matches the spec,
+which is what lets an agent iterate until the work converges.
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+### III. Logic Separated from the DOM
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+- Business logic MUST live in pure ES modules that do not touch `document`, `window`, or
+  `localStorage` directly; storage MUST be passed in (dependency injection) so tests can use
+  an in-memory fake.
+- DOM code MUST be a thin layer that wires events to logic and renders results.
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+Rationale: separating logic from the page makes it testable without a browser and keeps
+UI changes from breaking behavior.
+
+### IV. Simplicity and Zero Dependencies
+
+- The app MUST run by opening `index.html` through any static file server, with no build
+  step, bundler, framework, or third-party runtime dependency.
+- New files, abstractions, or tooling MUST be justified by a concrete requirement in the spec
+  (YAGNI).
+
+Rationale: the fewer moving parts, the easier the app is to maintain and to review.
+
+### V. Resilience and Accessibility
+
+- The app MUST stay usable when `localStorage` is unavailable, full, or contains corrupted
+  data: it falls back to in-memory state and never throws to the user.
+- Interactive elements MUST be real `<button>` elements with accessible names and visible
+  focus styles; state changes (e.g. favorited) MUST be exposed via ARIA attributes.
+
+Rationale: browser storage is unreliable (private mode, quotas), and accessibility is part
+of quality, not an add-on.
+
+## Technical Constraints
+
+- Languages: HTML5, CSS3, JavaScript (ES2020+ modules). No TypeScript, no transpilation.
+- Persistence: browser `localStorage` only; no backend, no network calls.
+- Supported browsers: current versions of Chrome, Edge, Firefox, and Safari.
+- Testing: Node.js 18+ built-in test runner (`node --test`), no test dependencies.
+
+## Development Workflow and Quality Gates
+
+- Work follows the Spec Kit loop: constitution → specify → plan → tasks → implement →
+  converge. A human reviews each artifact before moving to the next stage.
+- When an artifact is vague or wrong, the spec or plan is corrected first; code is then
+  regenerated from the corrected artifact rather than patched by hand.
+- Before every commit: `node --test` passes, and the page has been opened and checked
+  manually against the acceptance scenarios in the spec.
+- Commit messages MUST be in imperative mood and describe why, not only what.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- This constitution overrides other practices in this repository. Plans MUST include a
+  Constitution Check, and any violation MUST be recorded with a justification in the plan's
+  Complexity Tracking table.
+- Amendments are made by editing this file in a dedicated commit, with a short rationale in
+  the commit message.
+- Versioning follows semantic versioning: MAJOR for removing or redefining a principle, MINOR
+  for adding a principle or section, PATCH for wording clarifications.
+- Every review checks the change against Principles I–V.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-10-09 | **Last Amended**: 2026-10-09
