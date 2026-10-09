@@ -1,3 +1,5 @@
+// Tests for the built-in quote collection: size, unique IDs, required fields (FR-001).
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { QUOTES } from '../js/quotes.js';

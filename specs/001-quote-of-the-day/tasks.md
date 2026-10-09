@@ -175,8 +175,8 @@ gracefully.
 
 ## Phase 7: Convergence
 
-- [ ] T020 CRITICAL: Split `init()` in `js/app.js` (39 lines) into focused functions of ≤ 30 lines each per Constitution I (contradicts)
-- [ ] T021 Show the `#notice` on page load when the favorites store is not persistent, not only after a toggle, per FR-007 (partial)
-- [ ] T022 Use single quotes for the notice string in `js/app.js` (escape the apostrophe) per Constitution I formatting rule (contradicts)
-- [ ] T023 Write `README.md` (what it is, how to run tests and the page, link to quickstart) per T015 / plan structure (missing)
-- [ ] T024 Add the one-line responsibility comment at the top of each file in `tests/` per Constitution I (partial)
+- [X] T020 CRITICAL: Split `init()` in `js/app.js` (39 lines) into focused functions of ≤ 30 lines each per Constitution I (contradicts)
+- [X] T021 Show the `#notice` on page load when the favorites store is not persistent, not only after a toggle, per FR-007 (partial)
+- [X] T022 Use single quotes for the notice string in `js/app.js` (escape the apostrophe) per Constitution I formatting rule (contradicts)
+- [X] T023 Write `README.md` (what it is, how to run tests and the page, link to quickstart) per T015 / plan structure (missing)
+- [X] T024 Add the one-line responsibility comment at the top of each file in `tests/` per Constitution I (partial)

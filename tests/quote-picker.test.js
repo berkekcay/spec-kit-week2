@@ -1,3 +1,5 @@
+// Tests for random quote selection and the no-repeat 'New quote' pick (FR-002, FR-003).
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { pickRandomQuote, pickNextQuote } from '../js/quote-picker.js';

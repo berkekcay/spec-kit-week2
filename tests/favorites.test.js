@@ -1,3 +1,5 @@
+// Tests for the favorites store: toggle, persistence, corrupted data, storage failures (FR-004..FR-007).
+
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createFavoritesStore, STORAGE_KEY } from '../js/favorites.js';
