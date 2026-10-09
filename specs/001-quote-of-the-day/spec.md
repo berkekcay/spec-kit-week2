@@ -43,9 +43,12 @@ collection is displayed.
 **Acceptance Scenarios**:
 
 1. **Given** a quote is displayed, **When** the visitor presses "New quote", **Then** a
-   randomly chosen quote from the collection is displayed.
-2. **Given** the visitor uses only the keyboard, **When** they move focus to "New quote"
-   and press Enter or Space, **Then** a new quote is displayed.
+   randomly chosen quote from the collection is displayed that is **different from the
+   quote that was on screen**.
+2. **Given** the visitor presses "New quote" many times in a row, **When** comparing each
+   quote with the one before it, **Then** no two consecutive quotes are the same.
+3. **Given** the visitor uses only the keyboard, **When** they move focus to "New quote"
+   and press Enter or Space, **Then** a new, different quote is displayed.
 
 ---
 
@@ -80,6 +83,10 @@ again (or check the stored favorites), and confirm it is still shown as a favori
   "no favorites"; the page does not break.
 - Saved favorites refer to a quote that no longer exists in the collection: that entry is
   ignored.
+- Pressing "New quote" when random selection would repeat the displayed quote: a different
+  quote is shown instead (see FR-003).
+- Collection contains a single quote: "New quote" keeps showing that quote (nothing else to
+  pick); this is acceptable because the shipped collection has at least 10 quotes (FR-001).
 
 ## Requirements *(mandatory)*
 
@@ -90,7 +97,10 @@ again (or check the stored favorites), and confirm it is still shown as a favori
 - **FR-002**: On page load, the system MUST display exactly one quote, chosen at random from
   the collection, together with its author.
 - **FR-003**: The system MUST provide a "New quote" button that, when activated, displays a
-  randomly chosen quote from the collection.
+  quote chosen at random from the collection **excluding the currently displayed quote**,
+  so pressing the button always visibly changes the quote. *(Refined 2026-10-09: the
+  original wording "a randomly chosen quote" allowed the same quote to be picked again,
+  which made the button look broken; observed once in 60 clicks during review.)*
 - **FR-004**: The system MUST provide a favorite control for the displayed quote that toggles
   it between favorite and not favorite.
 - **FR-005**: The system MUST clearly show whether the displayed quote is a favorite, both

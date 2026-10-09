@@ -29,8 +29,9 @@ Map to the acceptance scenarios in [spec.md](./spec.md):
 
 1. **US1** Load the page → one quote and its author are visible. Reload a few times → the
    quote changes at least once.
-2. **US2** Click "New quote" → a quote from the collection is shown. Tab to the button and
-   press Enter/Space → same result.
+2. **US2** Click "New quote" → a *different* quote from the collection is shown, every time
+   (click it 50+ times; no two consecutive quotes are the same). Tab to the button and press
+   Enter/Space → same result.
 3. **US3** Click ☆ → it becomes ★ and its label is "Remove from favorites". Reload until the
    same quote appears → still ★. Click ★ → back to ☆.
 4. **Edge: corrupted data** In DevTools console run

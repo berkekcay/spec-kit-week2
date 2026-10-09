@@ -20,7 +20,20 @@ export const QUOTES; // ReadonlyArray<{ id: string, text: string, author: string
  * @throws {Error} if quotes is empty
  */
 export function pickRandomQuote(quotes, rng = Math.random);
+
+/**
+ * Returns a random quote whose id differs from currentId (FR-003, refined).
+ * Uniform over the remaining quotes. If no other quote exists, returns the only quote.
+ * @param {Array<Quote>} quotes  non-empty array
+ * @param {string} currentId     id of the quote on screen
+ * @param {() => number} [rng=Math.random]
+ * @returns {Quote}
+ * @throws {Error} if quotes is empty
+ */
+export function pickNextQuote(quotes, currentId, rng = Math.random);
 ```
+
+`pickRandomQuote` is used on page load; `pickNextQuote` is used by the "New quote" button.
 
 ## `js/favorites.js`
 

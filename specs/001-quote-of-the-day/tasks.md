@@ -93,6 +93,17 @@ is displayed.
 - [X] T010 [US2] In `js/app.js`, handle `click` on `#new-quote`: pick a quote with
   `pickRandomQuote` and re-render (keyboard activation comes from the native `<button>`)
 
+### Refinement: never repeat the displayed quote (spec FR-003 refined 2026-10-09)
+
+- [ ] T017 [US2] Add tests for `pickNextQuote(quotes, currentId, rng)` to
+  `tests/quote-picker.test.js` per `contracts/modules.md`: with rng 0 and currentId of the
+  first quote → returns the second; result never has `currentId` over 200 runs with the
+  default rng; single-quote collection returns that quote; empty array throws — run,
+  confirm they fail
+- [ ] T018 [US2] Implement `pickNextQuote` in `js/quote-picker.js` (uniform over quotes with
+  `id !== currentId`) — confirm T017 passes
+- [ ] T019 [US2] In `js/app.js`, make `#new-quote` use `pickNextQuote(QUOTES, currentQuote.id)`
+
 **Checkpoint**: US1 + US2 work independently
 
 ---
