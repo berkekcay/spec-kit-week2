@@ -7,3 +7,9 @@ export function pickRandomQuote(quotes, rng = Math.random) {
   const index = Math.floor(rng() * quotes.length);
   return quotes[index];
 }
+
+// Used by "New quote": excludes the displayed quote so the button always changes it (FR-003).
+export function pickNextQuote(quotes, currentId, rng = Math.random) {
+  const others = quotes.filter((quote) => quote.id !== currentId);
+  return pickRandomQuote(others.length > 0 ? others : quotes, rng);
+}

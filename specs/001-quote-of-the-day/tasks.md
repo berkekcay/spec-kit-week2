@@ -95,14 +95,14 @@ is displayed.
 
 ### Refinement: never repeat the displayed quote (spec FR-003 refined 2026-10-09)
 
-- [ ] T017 [US2] Add tests for `pickNextQuote(quotes, currentId, rng)` to
+- [X] T017 [US2] Add tests for `pickNextQuote(quotes, currentId, rng)` to
   `tests/quote-picker.test.js` per `contracts/modules.md`: with rng 0 and currentId of the
   first quote → returns the second; result never has `currentId` over 200 runs with the
   default rng; single-quote collection returns that quote; empty array throws — run,
   confirm they fail
-- [ ] T018 [US2] Implement `pickNextQuote` in `js/quote-picker.js` (uniform over quotes with
+- [X] T018 [US2] Implement `pickNextQuote` in `js/quote-picker.js` (uniform over quotes with
   `id !== currentId`) — confirm T017 passes
-- [ ] T019 [US2] In `js/app.js`, make `#new-quote` use `pickNextQuote(QUOTES, currentQuote.id)`
+- [X] T019 [US2] In `js/app.js`, make `#new-quote` use `pickNextQuote(QUOTES, currentQuote.id)`
 
 **Checkpoint**: US1 + US2 work independently
 
@@ -170,3 +170,13 @@ gracefully.
 2. Add US2 → validate scenario 2.
 3. Add US3 → validate scenarios 3–5.
 4. Polish, then `/speckit-converge`.
+
+---
+
+## Phase 7: Convergence
+
+- [ ] T020 CRITICAL: Split `init()` in `js/app.js` (39 lines) into focused functions of ≤ 30 lines each per Constitution I (contradicts)
+- [ ] T021 Show the `#notice` on page load when the favorites store is not persistent, not only after a toggle, per FR-007 (partial)
+- [ ] T022 Use single quotes for the notice string in `js/app.js` (escape the apostrophe) per Constitution I formatting rule (contradicts)
+- [ ] T023 Write `README.md` (what it is, how to run tests and the page, link to quickstart) per T015 / plan structure (missing)
+- [ ] T024 Add the one-line responsibility comment at the top of each file in `tests/` per Constitution I (partial)

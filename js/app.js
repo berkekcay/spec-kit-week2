@@ -1,7 +1,7 @@
 // DOM wiring: renders the current quote and connects the buttons to the logic modules.
 
 import { QUOTES } from './quotes.js';
-import { pickRandomQuote } from './quote-picker.js';
+import { pickRandomQuote, pickNextQuote } from './quote-picker.js';
 import { createFavoritesStore } from './favorites.js';
 
 function getLocalStorage() {
@@ -36,7 +36,7 @@ function init() {
   }
 
   newQuoteButton.addEventListener('click', () => {
-    currentQuote = pickRandomQuote(QUOTES);
+    currentQuote = pickNextQuote(QUOTES, currentQuote.id);
     renderQuote();
   });
 

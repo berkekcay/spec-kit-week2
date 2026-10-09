@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { pickRandomQuote } from '../js/quote-picker.js';
+import { pickRandomQuote, pickNextQuote } from '../js/quote-picker.js';
 
 const SAMPLE = [
   { id: 'a', text: 'A', author: 'X' },
@@ -24,4 +24,23 @@ test('default rng always returns an element of the input', () => {
 
 test('empty collection throws', () => {
   assert.throws(() => pickRandomQuote([]), /empty/);
+});
+
+test('pickNextQuote skips the current quote', () => {
+  assert.equal(pickNextQuote(SAMPLE, 'a', () => 0).id, 'b');
+});
+
+test('pickNextQuote never returns the current quote', () => {
+  for (let i = 0; i < 200; i += 1) {
+    assert.notEqual(pickNextQuote(SAMPLE, 'b').id, 'b');
+  }
+});
+
+test('pickNextQuote with a single quote returns that quote', () => {
+  const only = [SAMPLE[0]];
+  assert.equal(pickNextQuote(only, 'a').id, 'a');
+});
+
+test('pickNextQuote on an empty collection throws', () => {
+  assert.throws(() => pickNextQuote([], 'a'), /empty/);
 });
